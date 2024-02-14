@@ -76,6 +76,7 @@ variables:
         {% set unavailable_entity.fields = unavailable_entity.fields + [field] %}
       {% endif %}
     {% endfor %}
+    {{ unavailable_entity.fields }}
   entities_text: >-
     {% set unavailable_entity = namespace(fields=[], excludedEntities = []) %}
     {% if exclude.entity_id is defined %}
