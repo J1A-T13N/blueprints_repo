@@ -23,7 +23,6 @@ blueprint:
       name: 'Day to test on'
       description: 'Run test day'
       selector:
-        select:
         options:
           - label: 'Monday'
             value: '0'
