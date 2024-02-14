@@ -86,12 +86,12 @@ variables:
         {% set unavailable_entity.excludedEntities = unavailable_entity.excludedEntities + device_entities(device_id) %}
       {% endfor %}
     {% endif %}
-    {% for state in states | selectattr('state', 'eq', 'unavailable') %}
-        {% if state.state == 'unavailable' and not state.entity_id in unavailable_entity.excludedEntities %}
-          {% set unavailable_entity.includedEntities = unavailable_entity.includedEntities + [state.name] %}
+    {% for entity in states | selectattr('state', 'eq', 'unavailable') %}
+        {% if entity.state == 'unavailable' and not entity.entity_id in unavailable_entity.excludedEntities %}
+          {% set unavailable_entity.fields = unavailable_entity.fields + [entity.name] %}
         {% endif %}
     {% endfor %}
-    {{"⤵ \n- "}}{{unavailable_entity.includedEntities|join('\n- ')}}
+    {{"⤵ \n- "}}{{unavailable_entity.fields|join('\n- ')}}
 
 # Triggers
 trigger:
