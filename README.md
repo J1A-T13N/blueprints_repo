@@ -18,6 +18,9 @@ You can import blueprints: Setting > Automations & scenes > Blueprints > Import 
 
 # Notice
 
-Return format support list and string
-1. `{{ sensors_text }}` is string
-2. `{{ sensors }}` is list, field: entity_id、name、area_name、state
+1. 「Low battery notification」 Return format support list and string
+   1. `{{ sensors_text }}` is string
+   2. `{{ sensors }}` is list, field: entity_id、name、area_name、state
+2. 「unavailable_entities_notification」Return format support list and string
+   1. `{{ entities_text }}` is string
+   2. `{{ entities }}` is list, field: entity_id、name、area_name、state
