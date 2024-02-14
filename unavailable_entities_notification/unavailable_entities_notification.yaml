@@ -65,7 +65,7 @@ variables:
       {% endfor %}
     {% endif %}
 
-    {% for state in states | selectattr('state', 'eq', 'unavailable') %}
+    {% for entity in states | selectattr('state', 'eq', 'unavailable') %}
       {% set field = {
         "entity_id": entity.entity_id,
         "name": entity.name,
