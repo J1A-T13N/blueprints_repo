@@ -1,11 +1,11 @@
 # Blueprints for Home Assistant
 This repository fork from `[gmlupatelli/blueprints_repo](https://github.com/gmlupatelli/blueprints_repo)`
 
-***User the Blueprint by your own risk***
-
 ## Install
 
 You can import blueprints: Setting > Automations & scenes > Blueprints > Import Blueprint > URL: `[J1A-T13N/blueprints_repo](https://github.com/J1A-T13N/blueprints_repo)`
+
+***User the Blueprint by your own risk***
 
 # How to use
 
@@ -17,6 +17,7 @@ You can import blueprints: Setting > Automations & scenes > Blueprints > Import 
 3. The 「Excluded Sensors」 field is optional.
 
 # Notice
+
 Return format support list and string
 1. `{{ sensors_text }}` is string
 2. `{{ sensors }}` is list, field: entity_id、name、area_name、state
