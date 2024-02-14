@@ -25,19 +25,19 @@ blueprint:
       selector:
         select:
         options:
-          - label: Monday
+          - label: 'Monday'
             value: '0'
-          - label: Tueday
+          - label: 'Tueday'
             value: '1'
-          - label: Wednesday
+          - label: 'Wednesday'
             value: '2'
-          - label: Thursday
+          - label: 'Thursday'
             value: '3'
-          - label: Friday
+          - label: 'Friday'
             value: '4'
-          - label: Saturday
+          - label: 'Saturday'
             value: '5'
-          - label: Sunday
+          - label: 'Sunday'
             value: '6'
           multiple: true
 
@@ -105,7 +105,7 @@ condition:
 # Check if the automation is supposed to be executed during that specific weekday
   - condition: template
     value_template: >-
-        {{ current_day in test_day }}
+        {{ current_day in test_day | int }}
 
 
   # Check if the sensors list is not empty
