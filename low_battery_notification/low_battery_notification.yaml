@@ -55,8 +55,6 @@ blueprint:
       default: {}
       selector:
         target:
-          entity:
-            device_class: battery
 
     actions:
       name: Actions
@@ -71,8 +69,15 @@ variables:
   test_day: !input 'test_day'
   exclude: !input 'exclude'
   sensors: >-
-    {% set low_battery_entity = namespace(fields=[]) %}
-    {% set exclude_list = exclude.entity_id if exclude.entity_id is defined else [] %}
+    {% set low_battery_entity = namespace(fields=[], excludedEntities = []) %}
+    {% if exclude.entity_id is defined %} 
+        {% set low_battery_entity.excludedEntities = low_battery_entity.excludedEntities + exclude.entity_id %}
+    {% endif %}
+    {% if exclude.device_id is defined %}
+      {% for device_id in exclude.device_id %}
+        {% set low_battery_entity.excludedEntities = low_battery_entity.excludedEntities + device_entities(device_id) %}
+      {% endfor %}
+    {% endif %}
     {% for entity in states.sensor | selectattr('attributes.device_class', '==', 'battery') %}
       {% set field = {
         "entity_id": entity.entity_id,
@@ -80,7 +85,7 @@ variables:
         "area_name":  '' if area_name(entity.entity_id) is none else area_name(entity.entity_id),
         "state": entity.state
       } %}
-      {% if 0 <= field.state | int(-1) < threshold | int and not field.entity_id in exclude_list %}
+      {% if 0 <= field.state | int(-1) < threshold | int and not field.entity_id in low_battery_entity.excludedEntities %}
           {% set low_battery_entity.fields = low_battery_entity.fields + [field] %}
       {% endif %}
     {% endfor %}
@@ -91,34 +96,32 @@ variables:
         "area_name":  '' if area_name(entity.entity_id) is none else area_name(entity.entity_id),
         "state": entity.state
       } %}
-      {% if not field.entity_id in exclude_list %}
+      {% if not field.entity_id in low_battery_entity.excludedEntities %}
         {% set low_battery_entity.fields = low_battery_entity.fields + [field] %}
       {% endif %}
     {% endfor %}
     {{ low_battery_entity.fields }}
   sensors_text: >-
-    {% set result = namespace(sensors=[]) %}
-    {% for state in states.sensor | selectattr('attributes.device_class', '==', 'battery') %}
-      {% if exclude.entity_id is defined %}
-        {% if 0 <= state.state | int(-1) < threshold | int and not state.entity_id in exclude.entity_id %}
-          {% set result.sensors = result.sensors + [state.name ~ ' (' ~ state.state ~ ' %)'] %}
-        {% endif %}
-      {% else %}
-        {% if 0 <= state.state | int(-1) < threshold | int %}
-          {% set result.sensors = result.sensors + [state.name ~ ' (' ~ state.state ~ ' %)'] %}
-        {% endif %}
+    {% set low_battery_entity = namespace(fields=[], excludedEntities = []) %}
+    {% if exclude.entity_id is defined %} 
+        {% set low_battery_entity.excludedEntities = low_battery_entity.excludedEntities + exclude.entity_id %}
+    {% endif %}
+    {% if exclude.device_id is defined %}
+      {% for device_id in exclude.device_id %}
+        {% set low_battery_entity.excludedEntities = low_battery_entity.excludedEntities + device_entities(device_id) %}
+      {% endfor %}
+    {% endif %}
+    {% for entity in states.sensor | selectattr('attributes.device_class', '==', 'battery') %}
+      {% if 0 <= entity.state | int(-1) < threshold | int and not entity.entity_id in low_battery_entity.excludedEntities %}
+          {% set low_battery_entity.fields = low_battery_entity.fields + [entity.name ~ ' (' ~ entity.state ~ ' %)'] %}
       {% endif %}
     {% endfor %}
-    {% for state in states.binary_sensor | selectattr('attributes.device_class', '==', 'battery') | selectattr('state', '==', 'on') %}
-      {% if exclude.entity_id is defined %}
-        {% if not state.entity_id in exclude.entity_id %}
-          {% set result.sensors = result.sensors + [state.name] %}
-        {% endif %}
-      {% else %}
-        {% set result.sensors = result.sensors + [state.name] %}
+    {% for entity in states.binary_sensor | selectattr('attributes.device_class', '==', 'battery') | selectattr('state', '==', 'on') %}
+      {% if not entity.entity_id in low_battery_entity.excludedEntities %}
+        {% set low_battery_entity.fields = low_battery_entity.fields + [entity.name] %}
       {% endif %}
     {% endfor %}
-    {{"⤵ \n- "}}{{result.sensors|join('\n- ')}}
+    {{"⤵ \n- "}}{{low_battery_entity.fields|join('\n- ')}}
 
 
 # Triggers
