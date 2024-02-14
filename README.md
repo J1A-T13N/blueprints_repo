@@ -1,6 +1,7 @@
 # Blueprints for Home Assistant
-This repository fork from https://github.com/gmlupatelli/blueprints_repo
-***User the integration by your own risk***
+This repository fork from `[gmlupatelli/blueprints_repo](https://github.com/gmlupatelli/blueprints_repo)`
+
+***User the Blueprint by your own risk***
 
 ## Install
 
