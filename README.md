@@ -4,7 +4,7 @@ This repository fork from https://github.com/gmlupatelli/blueprints_repo
 
 ## Install
 
-You can import blueprints: Setting > Automations & scenes > Blueprints > Import Blueprint > URL: `[tsunglung/foodpanda](https://github.com/J1A-T13N/blueprints_repo)`
+You can import blueprints: Setting > Automations & scenes > Blueprints > Import Blueprint > URL: `[J1A-T13N/blueprints_repo](https://github.com/J1A-T13N/blueprints_repo)`
 
 # How to use
 
