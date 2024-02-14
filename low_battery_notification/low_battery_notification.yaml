@@ -20,25 +20,25 @@ blueprint:
           step: 5.0
 
     test_day:
-      name: 'Monday'
+      name: 'Day to test on'
       description: 'Run test day'
       selector:
         select:
           options:
             - label: Monday
-              value: 0
+              value: '0'
             - label: Tueday
-              value: 1
+              value: '1'
             - label: Wednesday
-              value: 2
+              value: '2'
             - label: Thursday
-              value: 3
+              value: '3'
             - label: Friday
-              value: 4
+              value: '4'
             - label: Saturday
-              value: 5
+              value: '5'
             - label: Sunday
-              value: 6
+              value: '6'
           multiple: true
 
     test_time:
