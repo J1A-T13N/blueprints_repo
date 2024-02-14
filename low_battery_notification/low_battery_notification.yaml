@@ -138,7 +138,7 @@ condition:
   # Check if the sensors list is not empty
   - condition: template
     value_template: >-
-        {{ sensors != "⤵ \n-"}}
+        {{ sensors_text|string|length > 0 and sensors|length > 0 }}
 
 
 # Actions
