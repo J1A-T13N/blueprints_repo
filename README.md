@@ -1,13 +1,13 @@
 # Blueprints for Home Assistant
 This repository fork from `[gmlupatelli/blueprints_repo](https://github.com/gmlupatelli/blueprints_repo)`
 
+***User the Blueprint by your own risk***
+
 ## Install
 
 You can import blueprints: Setting > Automations & scenes > Blueprints > Import Blueprint > URL: `[J1A-T13N/blueprints_repo](https://github.com/J1A-T13N/blueprints_repo)`
 
-***User the Blueprint by your own risk***
-
-# How to use
+## How to use
 
 1. Go to Setting > Automations & scenes > Blueprints
 2. Choose 「Low battery notification」 or 「unavailable_entities_notification」
@@ -16,7 +16,7 @@ You can import blueprints: Setting > Automations & scenes > Blueprints > Import 
 2. Enter required field.
 3. The 「Excluded Sensors」 field is optional.
 
-# Notice
+## Notice
 
 1. 「Low battery notification」 Return format support list and string
    1. `{{ sensors_text }}` is string
