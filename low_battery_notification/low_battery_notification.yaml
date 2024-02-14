@@ -92,7 +92,9 @@ variables:
         {% set result.sensors = result.sensors + [state.name] %}
       {% endif %}
     {% endfor %}
-    {{"⤵ \n- "}}{{result.sensors|join('\n- ')}}
+    {{ result.sensors }}
+  sensors_text: >-
+    {{"⤵ \n- "}}{{sensors|join('\n- ')}}
 
 
 # Triggers
