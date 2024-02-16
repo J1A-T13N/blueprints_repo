@@ -137,7 +137,7 @@ condition:
 # Check if the automation is supposed to be executed during that specific weekday
   - condition: template
     value_template: >-
-        {{ current_day in test_day | string }}
+        {{ current_day|string in test_day }}
 
 
   # Check if the sensors list is not empty
