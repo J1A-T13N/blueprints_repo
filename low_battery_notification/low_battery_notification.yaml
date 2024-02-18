@@ -143,7 +143,7 @@ condition:
   # Check if the sensors list is not empty
   - condition: template
     value_template: >-
-        {{ sensors_text|string|length > 0 and sensors|length > 0 }}
+        {{ sensors_text|string|length > 0 and sensors|count > 0 }}
 
 
 # Actions
