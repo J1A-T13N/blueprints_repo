@@ -111,7 +111,7 @@ condition:
   # Check if the entities list is not empty
   - condition: template
     value_template: >-
-        {{ entities_text|string|length > 0 and entities|length > 0 }}
+        {{ entities_text|string|length > 0 and entities|count > 0 }}
 
 
 # Actions
